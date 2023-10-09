@@ -1,0 +1,21 @@
+<resources>
+    <color name="onyx">#303633</color>
+    <color name="aquamarine">#8BE8CB</color>
+    <color name="cadet_gray">#7EA2AA</color>
+    <color name="cool_gray">#888DA7</color>
+    <color name="mountbatten_pink">#9C7A97</color>
+
+    <string name="app_name">Quiz</string>
+    <string name="button_true">Prawda</string>
+    <string name="button_false">Fałsz</string>
+    <string name="button_next">Następne</string>
+
+    <string name="q_python">W języku programowania Python, "None" jest równoważne "False" w warunkach logicznych.</string>
+    <string name="q_oop">W programowaniu obiektowym, dziedziczenie umożliwia klasie dziedziczenie cech i zachowań innej klasy.</string>
+    <string name="q_cpp">W języku C++, "nullptr" jest alternatywą dla wskaźnika NULL.</string>
+    <string name="q_mth">W programowaniu wielowątkowym, konkurencja to sytuacja, w której wątki dzielą wspólne zasoby bez synchronizacji.</string>
+    <string name="q_onotation">Algorytm sortowania szybkiego (quicksort) zawsze ma złożoność czasową O(n^2).</string>
+
+    <string name="correct_answer">Odpowiedź jest prawidłowa!</string>
+    <string name="incorrect_answer">Odpowiedź jest nieprawidłowa!</string>
+</resources>
