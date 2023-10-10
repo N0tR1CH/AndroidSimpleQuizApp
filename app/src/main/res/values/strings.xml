@@ -18,4 +18,7 @@
 
     <string name="correct_answer">Odpowiedź jest prawidłowa!</string>
     <string name="incorrect_answer">Odpowiedź jest nieprawidłowa!</string>
+
+    <string name="right_answers">Poprawne: </string>
+    <string name="wrong_answers">Niepoprawne: </string>
 </resources>

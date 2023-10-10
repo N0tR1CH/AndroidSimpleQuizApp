@@ -13,14 +13,18 @@ public class MainActivity extends AppCompatActivity {
     private Button trueButton;
     private Button falseButton;
     private Button nextButton;
+    private TextView rightAnswersTextView;
+    private TextView wrongAnswersTextView;
     private TextView questionTextView;
+    private int rightAnswers;
+    private int wrongAnswers;
 
     private Question[] questions = new Question[] {
-            new Question(R.string.q_python, false),
-            new Question(R.string.q_oop, true),
-            new Question(R.string.q_cpp, true),
-            new Question(R.string.q_mth, false),
-            new Question(R.string.q_onotation, false)
+        new Question(R.string.q_python, false),
+        new Question(R.string.q_oop, true),
+        new Question(R.string.q_cpp, true),
+        new Question(R.string.q_mth, false),
+        new Question(R.string.q_onotation, false)
     };
 
     @Override
@@ -32,11 +36,20 @@ public class MainActivity extends AppCompatActivity {
         falseButton = findViewById(R.id.false_button);
         nextButton = findViewById(R.id.next_button);
         questionTextView = findViewById(R.id.question_text_view);
+        rightAnswersTextView = findViewById(R.id.right_answers);
+        wrongAnswersTextView = findViewById(R.id.wrong_answers);
+        rightAnswers = 0;
+        wrongAnswers = 0;
+
+        rightAnswersTextView.setText(getString(R.string.right_answers) + " " + rightAnswers);
+        wrongAnswersTextView.setText(getString(R.string.wrong_answers) + " " + wrongAnswers);
 
         trueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 checkAnswerCorrectness(true);
+                currentIndex = (currentIndex + 1) % questions.length;
+                setNextQuestion();
             }
         });
 
@@ -44,6 +57,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 checkAnswerCorrectness(false);
+                currentIndex = (currentIndex + 1) % questions.length;
+                setNextQuestion();
             }
         });
 
@@ -66,9 +81,13 @@ public class MainActivity extends AppCompatActivity {
         int resultMessageId = 0;
 
         if (userAnswer == correctAnswer) {
+            rightAnswers++;
             resultMessageId = R.string.correct_answer;
+            rightAnswersTextView.setText(getString(R.string.right_answers) + " " + rightAnswers);
         } else {
+            wrongAnswers++;
             resultMessageId = R.string.incorrect_answer;
+            wrongAnswersTextView.setText(getString(R.string.wrong_answers) + " " + wrongAnswers);
         }
 
         Toast.makeText(this, resultMessageId, Toast.LENGTH_SHORT).show();

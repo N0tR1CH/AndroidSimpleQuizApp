@@ -71,7 +71,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="152dp"
         android:orientation="horizontal"
         android:paddingLeft="30dp"
         android:paddingRight="30dp">
@@ -82,13 +82,45 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:backgroundTint="@color/cadet_gray"
+            android:padding="30dp"
             android:shadowColor="@color/black"
             android:shadowDx="1"
             android:shadowDy="1"
             android:shadowRadius="1"
-            android:padding="30dp"
             android:text="@string/button_next"
             android:textColor="@color/mountbatten_pink" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/right_answers"
+            android:layout_width="wrap_content"
+            android:layout_height="46dp"
+            android:layout_weight="1"
+            android:shadowColor="@color/black"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="1"
+            android:text="@string/right_answers"
+            android:textColor="@color/mountbatten_pink"
+            android:textSize="32dp" />
+
+        <TextView
+            android:id="@+id/wrong_answers"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:layout_weight="1"
+            android:shadowColor="@color/black"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="1"
+            android:text="@string/wrong_answers"
+            android:textColor="@color/mountbatten_pink"
+            android:textSize="32dp" />
     </LinearLayout>
 
 </LinearLayout>
