@@ -98,7 +98,7 @@
 
         <TextView
             android:id="@+id/right_answers"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="46dp"
             android:layout_weight="1"
             android:shadowColor="@color/black"
@@ -107,11 +107,12 @@
             android:shadowRadius="1"
             android:text="@string/right_answers"
             android:textColor="@color/mountbatten_pink"
-            android:textSize="32dp" />
+            android:textSize="32dp"
+            android:gravity="center"/>
 
         <TextView
             android:id="@+id/wrong_answers"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_weight="1"
             android:shadowColor="@color/black"
@@ -120,7 +121,8 @@
             android:shadowRadius="1"
             android:text="@string/wrong_answers"
             android:textColor="@color/mountbatten_pink"
-            android:textSize="32dp" />
+            android:textSize="32dp"
+            android:gravity="center"/>
     </LinearLayout>
 
 </LinearLayout>
