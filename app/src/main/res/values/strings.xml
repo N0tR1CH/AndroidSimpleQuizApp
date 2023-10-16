@@ -21,4 +21,8 @@
 
     <string name="right_answers">Poprawne: </string>
     <string name="wrong_answers">Niepoprawne: </string>
+    <string name="are_you_sure">Czy na pewno chcesz zobaczyć odpowiedzi?</string>
+    <string name="show_answer_btn">Pokaż odpowiedź</string>
+    <string name="ma_show_answer">Pokaż podpowiedź</string>
+    <string name="answer_was_shown">Odpowiedź była już wyświetlona!</string>
 </resources>

@@ -2,6 +2,7 @@ package com.example.quiz;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
     private Button trueButton;
     private Button falseButton;
     private Button nextButton;
+    private Button showAnswerButton;
     private TextView rightAnswersTextView;
     private TextView wrongAnswersTextView;
     private TextView questionTextView;
@@ -27,6 +29,9 @@ public class MainActivity extends AppCompatActivity {
     private static final String KEY_WRONG_ANSWERS = "wrongAnswers";
     private static final String KEY_USER_ANSWERS = "userAnswers";
     private static final String KEY_USER_ANSWERED_CURRENT_QUESTION = "userAnsweredCurrentQuestion";
+    public static final String KEY_EXTRA_ANSWER = "com.example.quiz.correctAnswer";
+    private static final int REQUEST_CODE_PROMPT = 0;
+    private boolean answerShown;
 
     private Question[] questions = new Question[] {
         new Question(R.string.q_python, false),
@@ -67,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
         trueButton = findViewById(R.id.true_button);
         falseButton = findViewById(R.id.false_button);
         nextButton = findViewById(R.id.next_button);
+        showAnswerButton = findViewById(R.id.ma_show_answer_button);
         questionTextView = findViewById(R.id.question_text_view);
         rightAnswersTextView = findViewById(R.id.right_answers);
         wrongAnswersTextView = findViewById(R.id.wrong_answers);
@@ -108,6 +114,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 currentIndex = (currentIndex + 1) % questions.length;
+                answerShown = false;
                 setNextQuestion();
                 userAnsweredCurrentQuestion = false;
 
@@ -127,6 +134,17 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        showAnswerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, PromptActivity.class);
+                boolean correctAnswer = questions[currentIndex].isTrueAnswer();
+                intent.putExtra(KEY_EXTRA_ANSWER, correctAnswer);
+                startActivityForResult(intent, REQUEST_CODE_PROMPT);
+            }
+        });
+
         setNextQuestion();
     }
 
@@ -192,6 +210,22 @@ public class MainActivity extends AppCompatActivity {
         outState.putBoolean(KEY_USER_ANSWERED_CURRENT_QUESTION, userAnsweredCurrentQuestion);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode != RESULT_OK) {
+            return;
+        }
+
+        if (requestCode == REQUEST_CODE_PROMPT) {
+            if (data == null) {
+                return;
+            }
+
+            answerShown = data.getBooleanExtra(PromptActivity.KEY_EXTRA_ANSWER_SHOWN, false);
+        }
+    }
+
     private void setNextQuestion() {
         questionTextView.setText(questions[currentIndex].getQuestionId());
     }
@@ -200,12 +234,16 @@ public class MainActivity extends AppCompatActivity {
         boolean correctAnswer = questions[currentIndex].isTrueAnswer();
         int resultMessageId;
 
-        if (userAnswer == correctAnswer) {
-            rightAnswers++;
-            resultMessageId = R.string.correct_answer;
+        if (answerShown) {
+            resultMessageId = R.string.answer_was_shown;
         } else {
-            wrongAnswers++;
-            resultMessageId = R.string.incorrect_answer;
+            if (userAnswer == correctAnswer) {
+                rightAnswers++;
+                resultMessageId = R.string.correct_answer;
+            } else {
+                wrongAnswers++;
+                resultMessageId = R.string.incorrect_answer;
+            }
         }
 
         Toast.makeText(this, resultMessageId, Toast.LENGTH_SHORT).show();
