@@ -21,6 +21,12 @@ public class MainActivity extends AppCompatActivity {
     private int wrongAnswers;
     private int userAnswers;
     private boolean userAnsweredCurrentQuestion;
+    private static final String QUIZ_TAG = "MainActivity";
+    private static final String KEY_CURRENT_INDEX = "currentIndex";
+    private static final String KEY_RIGHT_ANSWERS = "rightAnswers";
+    private static final String KEY_WRONG_ANSWERS = "wrongAnswers";
+    private static final String KEY_USER_ANSWERS = "userAnswers";
+    private static final String KEY_USER_ANSWERED_CURRENT_QUESTION = "userAnsweredCurrentQuestion";
 
     private Question[] questions = new Question[] {
         new Question(R.string.q_python, false),
@@ -35,7 +41,23 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         // Inform in log that the onCreate method is called
-        Log.d("MainActivity", "onCreate() called");
+        Log.d(QUIZ_TAG, "onCreate() called");
+
+        if (savedInstanceState != null) {
+            currentIndex = savedInstanceState.getInt(KEY_CURRENT_INDEX);
+            rightAnswers = savedInstanceState.getInt(KEY_RIGHT_ANSWERS);
+            wrongAnswers = savedInstanceState.getInt(KEY_WRONG_ANSWERS);
+            userAnswers = savedInstanceState.getInt(KEY_USER_ANSWERS);
+            userAnsweredCurrentQuestion = savedInstanceState.getBoolean(
+                KEY_USER_ANSWERED_CURRENT_QUESTION);
+
+            if (userAnswers == questions.length) {
+                String rightAnswersMessage = getString(R.string.right_answers) + " " + rightAnswers;
+                String wrongAnswersMessage = getString(R.string.wrong_answers) + " " + wrongAnswers;
+                rightAnswersTextView.setText(rightAnswersMessage);
+                wrongAnswersTextView.setText(wrongAnswersMessage);
+            }
+        }
 
         // Inform in a toast that the onCreate method is called
         Toast.makeText(this, "Welcome to the quiz!", Toast.LENGTH_SHORT).show();
@@ -113,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
 
         // Inform in log that the onStart method is called
-        Log.d("MainActivity", "onStart() called");
+        Log.d(QUIZ_TAG, "onStart() called");
     }
 
     @Override
@@ -121,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
 
         // Inform in log that the onResume method is called
-        Log.d("MainActivity", "onResume() called");
+        Log.d(QUIZ_TAG, "onResume() called");
     }
 
     @Override
@@ -129,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
         super.onPause();
 
         // Inform in log that the onPause method is called
-        Log.d("MainActivity", "onPause() called");
+        Log.d(QUIZ_TAG, "onPause() called");
     }
 
     @Override
@@ -137,7 +159,7 @@ public class MainActivity extends AppCompatActivity {
         super.onStop();
 
         // Inform in log that the onStop method is called
-        Log.d("MainActivity", "onStop() called");
+        Log.d(QUIZ_TAG, "onStop() called");
     }
 
     @Override
@@ -145,7 +167,7 @@ public class MainActivity extends AppCompatActivity {
         super.onRestart();
 
         // Inform in log that the onRestart method is called
-        Log.d("MainActivity", "onRestart() called");
+        Log.d(QUIZ_TAG, "onRestart() called");
     }
 
     @Override
@@ -153,7 +175,21 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
 
         // Inform in log that the onDestroy method is called
-        Log.d("MainActivity", "onDestroy() called");
+        Log.d(QUIZ_TAG, "onDestroy() called");
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        // Inform in log that the onSaveInstanceState method is called
+        Log.d(QUIZ_TAG, "onSaveInstanceState() called");
+
+        outState.putInt(KEY_CURRENT_INDEX, currentIndex);
+        outState.putInt(KEY_RIGHT_ANSWERS, rightAnswers);
+        outState.putInt(KEY_WRONG_ANSWERS, wrongAnswers);
+        outState.putInt(KEY_USER_ANSWERS, userAnswers);
+        outState.putBoolean(KEY_USER_ANSWERED_CURRENT_QUESTION, userAnsweredCurrentQuestion);
     }
 
     private void setNextQuestion() {
