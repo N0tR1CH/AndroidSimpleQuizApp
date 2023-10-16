@@ -3,6 +3,7 @@ package com.example.quiz;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -32,6 +33,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Inform in log that the onCreate method is called
+        Log.d("MainActivity", "onCreate() called");
+
+        // Inform in a toast that the onCreate method is called
+        Toast.makeText(this, "Welcome to the quiz!", Toast.LENGTH_SHORT).show();
+
         setContentView(R.layout.activity_main);
 
         trueButton = findViewById(R.id.true_button);
@@ -98,6 +106,54 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         setNextQuestion();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        // Inform in log that the onStart method is called
+        Log.d("MainActivity", "onStart() called");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        // Inform in log that the onResume method is called
+        Log.d("MainActivity", "onResume() called");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        // Inform in log that the onPause method is called
+        Log.d("MainActivity", "onPause() called");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        // Inform in log that the onStop method is called
+        Log.d("MainActivity", "onStop() called");
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+
+        // Inform in log that the onRestart method is called
+        Log.d("MainActivity", "onRestart() called");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        // Inform in log that the onDestroy method is called
+        Log.d("MainActivity", "onDestroy() called");
     }
 
     private void setNextQuestion() {
